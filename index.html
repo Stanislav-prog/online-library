@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Online Library</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <h1 class="title">Online Library</h1>
+        <form action="#" class="book-form">
+            <input type="text" class="book-form__input book-form__input--id" placeholder="ID" name="id" required>
+            <input type="text" class="book-form__input book-form__input--title" placeholder="Title" name="title" required>
+            <input type="text" class="book-form__input book-form__input--year" placeholder="Edition year" name="edition_year" required>
+            <input type="text" class="book-form__input book-form__input--author" placeholder="Author" name="author" required>
+            <input type="text" class="book-form__input book-form__input--cost" placeholder="Cost" name="cost" required>
+            <input type="text" class="book-form__input book-form__input--copies" placeholder="Number of copies" name="number-of-copies" required>
+            <button class="book-form__button" type="submit">Add book</button>
+            <div class="message"></div>
+        </form>
+        <div class="table-container"></div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
