@@ -11,14 +11,17 @@
 <body>
     <div class="wrapper">
         <h1 class="title">Online Library</h1>
-        <form action="#" class="book-form">
-            <input type="text" class="book-form__input book-form__input--id" placeholder="ID" name="id" required>
-            <input type="text" class="book-form__input book-form__input--title" placeholder="Title" name="title" required>
-            <input type="text" class="book-form__input book-form__input--year" placeholder="Edition year" name="edition_year" required>
-            <input type="text" class="book-form__input book-form__input--author" placeholder="Author" name="author" required>
-            <input type="text" class="book-form__input book-form__input--cost" placeholder="Cost" name="cost" required>
-            <input type="text" class="book-form__input book-form__input--copies" placeholder="Number of copies" name="number-of-copies" required>
-            <button class="book-form__button" type="submit">Add book</button>
+        <form action="#" id="form" class="book-form">
+            <input type="number" id="book-id" class="book-form__input" placeholder="ID" name="id" required>
+            <input type="text" id="book-title" class="book-form__input" placeholder="Title" name="title" required>
+            <input type="number" id="book-edition-year" class="book-form__input" placeholder="Edition year" name="edition_year" required>
+            <input type="text" id="book-author" class="book-form__input" placeholder="Author" name="author" required>
+            <input type="number" id="book-cost" class="book-form__input" placeholder="Cost" name="cost" required>
+            <input type="number" id="book-copies" class="book-form__input" placeholder="Number of copies" name="number-of-copies" required>
+            <div class="book-form__buttons">
+                <button class="book-form__button" type="submit">Add book</button>
+                <button class="book-form__button" type="reset">Reset form</button>
+            </div>
             <div class="message"></div>
         </form>
         <div class="table-container"></div>

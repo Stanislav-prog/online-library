@@ -1,12 +1,12 @@
-var books = [];
+const books = [];
 
-const form = document.querySelector('.book-form');
-const formId = document.querySelector('.book-form__input--id');
-const formTitle = document.querySelector('.book-form__input--title');
-const formEditionYear = document.querySelector('.book-form__input--year');
-const formAuthor = document.querySelector('.book-form__input--author');
-const formCost = document.querySelector('.book-form__input--cost');
-const formNumberOfCopies = document.querySelector('.book-form__input--copies');
+const form = document.getElementById('form');
+const formId = document.getElementById('book-id');
+const formTitle = document.getElementById('book-title');
+const formEditionYear = document.getElementById('book-edition-year');
+const formAuthor = document.getElementById('book-author');
+const formCost = document.getElementById('book-cost');
+const formNumberOfCopies = document.getElementById('book-copies');
 
 form.addEventListener('submit', (e) => {
     e.preventDefault()
@@ -65,8 +65,13 @@ form.addEventListener('submit', (e) => {
 
             for (let key in book) {
                 const td = document.createElement('td');
-                td.textContent = book[key];
-                row.appendChild(td);
+                if (key === 'cost'){
+                    td.textContent = book[key] + '$';
+                    row.appendChild(td);
+                } else {
+                    td.textContent = book[key];
+                    row.appendChild(td);
+                }
             }
 
             table.appendChild(row);
