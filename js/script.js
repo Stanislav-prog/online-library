@@ -9,7 +9,10 @@ const formCost = document.getElementById('book-cost');
 const formNumberOfCopies = document.getElementById('book-copies');
 
 form.addEventListener('submit', (e) => {
-    e.preventDefault()
+    e.preventDefault();
+})
+
+function addBook(){
 
     const idValue = formId.value;
     const titleValue = formTitle.value;
@@ -81,4 +84,4 @@ form.addEventListener('submit', (e) => {
     }
 
     createTable(books);
-});
+}
