@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Online Library</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <h1 class="title">Online Library</h1>
+        <form action="#" id="form" class="book-form">
+            <input type="number" id="book-id" class="book-form__input" placeholder="ID" name="id" required>
+            <input type="text" id="book-title" class="book-form__input" placeholder="Title" name="title" required>
+            <input type="number" id="book-edition-year" class="book-form__input" placeholder="Edition year" name="edition_year" required>
+            <input type="text" id="book-author" class="book-form__input" placeholder="Author" name="author" required>
+            <input type="number" id="book-cost" class="book-form__input" placeholder="Cost" name="cost" required>
+            <input type="number" id="book-copies" class="book-form__input" placeholder="Number of copies" name="number-of-copies" required>
+            <div class="book-form__buttons">
+                <button class="book-form__button" type="submit" onclick="addBook()">Add book</button>
+                <button class="book-form__button" type="reset">Reset form</button>
+            </div>
+            <div class="message"></div>
+        </form>
+        <div class="table-container">
+            <table class="table-container__table">
+                <tr class="header-row">
+                    <th class="header-row__element">ID</th>
+                    <th class="header-row__element">Title</th>
+                    <th class="header-row__element">Edition year</th>
+                    <th class="header-row__element">Author</th>
+                    <th class="header-row__element">Cost</th>
+                    <th class="header-row__element">Number of copies</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
