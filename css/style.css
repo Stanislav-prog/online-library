@@ -51,22 +51,22 @@
     background-color: red;
  }
 .message{
-    margin-top: 30px;
+    padding-top: 30px;
 }
 
-.books-table{
+.table-container__table{
     margin-top: 10px;
     width: 100%;
     border-collapse: collapse;
 }
-.books-table th, .books-table td{
+.table-container__table th, .table-container__table td{
     border: 1px solid black;
     padding: 10px;
     text-align: left;
 }
-.books-table td:last-child{
+.table-container__table td:last-child{
     margin-bottom: 10px;
 }
-.books-table th{
+.table-container__table th{
     background-color: #f2f2f2;
 }

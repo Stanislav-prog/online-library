@@ -8,12 +8,14 @@ const formAuthor = document.getElementById('book-author');
 const formCost = document.getElementById('book-cost');
 const formNumberOfCopies = document.getElementById('book-copies');
 
+//Recheck info of EventListener
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 })
-
+//Make it the way so the table is not being rewritten everytime, but only one row adds to present ones
 function addBook(){
 
+    // Making a new book appear in a dataset of books
     const idValue = formId.value;
     const titleValue = formTitle.value;
     const editionYearValue = formEditionYear.value;
@@ -29,7 +31,7 @@ function addBook(){
         cost: costValue,
         numberOfCopies: numberOfCopiesValue,
     }
-
+    // Pushing new book to the list
     const messageElement = document.querySelector('.message');
 
     if (books.some(book => book.id_number === newBook.id_number)) {
@@ -43,45 +45,22 @@ function addBook(){
     setTimeout(() => {
         messageElement.textContent = '';
     }, 3000)
+    // Adding one row with newBook data
+    const table = document.querySelector('.table-container__table');
 
-    function createTable(books){
-        const tableContainer = document.querySelector('.table-container');
+    const row = document.createElement('tr');
 
-        tableContainer.innerHTML = '';
+    for (let key in newBook){
+        const td = document.createElement('td');
 
-        const table = document.createElement('table');
-        table.className = 'books-table';
-
-        const headerRow = document.createElement('tr');
-        const headers = ['ID', 'Title', 'Edition Year', 'Author', 'Cost', 'Number of copies'];
-
-        headers.forEach(header => {
-            const th = document.createElement('th');
-            th.textContent = header;
-            headerRow.appendChild(th);
-        })
-
-        table.appendChild(headerRow);
-
-        books.forEach(book => {
-            const row = document.createElement('tr');
-
-            for (let key in book) {
-                const td = document.createElement('td');
-                if (key === 'cost'){
-                    td.textContent = book[key] + '$';
-                    row.appendChild(td);
-                } else {
-                    td.textContent = book[key];
-                    row.appendChild(td);
-                }
-            }
-
-            table.appendChild(row);
-        });
-
-        tableContainer.appendChild(table);
+        if (key === 'cost'){
+            td.textContent = newBook[key] + '$';
+            row.appendChild(td);
+        } else {
+            td.textContent = newBook[key];
+            row.appendChild(td);
+        }
     }
 
-    createTable(books);
+    table.appendChild(row);
 }
