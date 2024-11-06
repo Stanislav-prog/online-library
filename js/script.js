@@ -8,14 +8,12 @@ const formAuthor = document.getElementById('book-author');
 const formCost = document.getElementById('book-cost');
 const formNumberOfCopies = document.getElementById('book-copies');
 
-//Recheck info of EventListener
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 })
-//Make it the way so the table is not being rewritten everytime, but only one row adds to present ones
+
 function addBook(){
 
-    // Making a new book appear in a dataset of books
     const idValue = formId.value;
     const titleValue = formTitle.value;
     const editionYearValue = formEditionYear.value;
@@ -31,7 +29,7 @@ function addBook(){
         cost: costValue,
         numberOfCopies: numberOfCopiesValue,
     }
-    // Pushing new book to the list
+
     const messageElement = document.querySelector('.message');
 
     if (books.some(book => book.id_number === newBook.id_number)) {
@@ -45,8 +43,8 @@ function addBook(){
     setTimeout(() => {
         messageElement.textContent = '';
     }, 3000)
-    // Adding one row with newBook data
-    const table = document.querySelector('.table-container__table');
+
+    const tableBody = document.querySelector('.table-container__body');
 
     const row = document.createElement('tr');
 
@@ -62,5 +60,47 @@ function addBook(){
         }
     }
 
-    table.appendChild(row);
+    tableBody.appendChild(row);
+}
+
+document.getElementById('idFilter').addEventListener('input', filterTable);
+document.getElementById('titleFilter').addEventListener('input', filterTable);
+document.getElementById('editionYearFilter').addEventListener('input', filterTable);
+document.getElementById('authorFilter').addEventListener('input', filterTable);
+document.getElementById('costFilter').addEventListener('input', filterTable);
+document.getElementById('copiesFilter').addEventListener('input', filterTable);
+
+function filterTable(){
+
+    const idFilterValue = document.getElementById('idFilter').value.toLowerCase();
+    const titleFilterValue = document.getElementById('titleFilter').value.toLowerCase();
+    const editionYearFilterValue = document.getElementById('editionYearFilter').value.toLowerCase();
+    const authorFilterValue = document.getElementById('authorFilter').value.toLowerCase();
+    const costFilterValue = document.getElementById('costFilter').value.toLowerCase();
+    const copiesFilterValue = document.getElementById('copiesFilter').value.toLowerCase();
+
+    const table = document.querySelector('.table-container__table');
+    const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+    for (const row of rows) {
+        const id = row.cells[0].textContent.toLowerCase();
+        const title = row.cells[1].textContent.toLowerCase();
+        const editionYear = row.cells[2].textContent.toLowerCase();
+        const author = row.cells[3].textContent.toLowerCase();
+        const cost = row.cells[4].textContent.toLowerCase();
+        const copies = row.cells[5].textContent.toLowerCase();
+
+        const idMatch = id.includes(idFilterValue);
+        const titleMatch = title.includes(titleFilterValue);
+        const editionYearMatch = editionYear.includes(editionYearFilterValue);
+        const authorMatch = author.includes(authorFilterValue);
+        const costMatch = cost.includes(costFilterValue);
+        const copiesMatch = copies.includes(copiesFilterValue);
+
+        if (idMatch && titleMatch && editionYearMatch && authorMatch && costMatch && copiesMatch) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    }
 }

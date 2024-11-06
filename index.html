@@ -26,14 +26,25 @@
         </form>
         <div class="table-container">
             <table class="table-container__table">
-                <tr class="header-row">
-                    <th class="header-row__element">ID</th>
-                    <th class="header-row__element">Title</th>
-                    <th class="header-row__element">Edition year</th>
-                    <th class="header-row__element">Author</th>
-                    <th class="header-row__element">Cost</th>
-                    <th class="header-row__element">Number of copies</th>
-                </tr>
+                <thead class="table-container__head">
+                    <tr class="header-row">
+                        <th class="header-row__element">ID</th>
+                        <th class="header-row__element">Title</th>
+                        <th class="header-row__element">Edition year</th>
+                        <th class="header-row__element">Author</th>
+                        <th class="header-row__element">Cost</th>
+                        <th class="header-row__element">Number of copies</th>
+                    </tr>
+                    <tr class="header-row-sorting">
+                        <th class="header-row-sorting__id"><input type="number" id="idFilter" placeholder="Find by ID"></th>
+                        <th class="header-row-sorting__title"><input type="text" id="titleFilter" placeholder="Sort by Title"></th>
+                        <th class="header-row-sorting__edition-year"><input type="number" id="editionYearFilter" placeholder="Sort by Edition Year"></th>
+                        <th class="header-row-sorting__author"><input type="text" id="authorFilter" placeholder="Sort by Author"></th>
+                        <th class="header-row-sorting__cost"><input type="number" id="costFilter" placeholder="1"></th>
+                        <th class="header-row-sorting__copies"><input type="number" id="copiesFilter" placeholder="Sort by Number of copies"></th>
+                    </tr>
+                </thead>
+                <tbody class="table-container__body"></tbody>
             </table>
         </div>
     </div>
