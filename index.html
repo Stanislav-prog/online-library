@@ -37,12 +37,30 @@
                         <th class="header-row__element">Number of copies</th>
                     </tr>
                     <tr class="header-row-sorting">
-                        <th class="header-row-sorting__id"><input type="number" id="idFilter" placeholder="Find by ID"></th>
-                        <th class="header-row-sorting__title"><input type="text" id="titleFilter" placeholder="Sort by Title"></th>
-                        <th class="header-row-sorting__edition-year"><input type="number" id="editionYearFilter" placeholder="Sort by Edition Year"></th>
-                        <th class="header-row-sorting__author"><input type="text" id="authorFilter" placeholder="Sort by Author"></th>
-                        <th class="header-row-sorting__cost"><input type="number" id="costFilter" placeholder="1"></th>
-                        <th class="header-row-sorting__copies"><input type="number" id="copiesFilter" placeholder="Sort by Number of copies"></th>
+                        <th class="header-row-sorting__id">
+                            <input type="number" id="idFilter" placeholder="Find by ID">
+                            <button id="removeIdFilter">Remove sorting by ID</button></th>
+                        <th class="header-row-sorting__title">
+                            <input type="text" id="titleFilter" placeholder="Sort by Title">
+                            <button id="removeTitleFilter">Remove sorting by Title</button></th>
+                        </th>
+                        <th class="header-row-sorting__edition-year">
+                            <input type="number" id="editionYearFilter" placeholder="Sort by Edition Year">
+                            <button id="removeYearFilter">Remove sorting by Year</button></th>
+                        </th>
+                        <th class="header-row-sorting__author">
+                            <input type="text" id="authorFilter" placeholder="Sort by Author">
+                            <button id="removeAuthorFilter">Remove sorting by Author</button></th>
+                        </th>
+                        <th class="header-row-sorting__cost">
+                            <label>Min: <input type="number" id="costFilterMin" placeholder="1"></label>
+                            <label>Max: <input type="number" id="costFilterMax" placeholder="1000"></label>
+                            <button id="removeCostFilter">Remove sorting by Cost</button></th>
+                        </th>
+                        <th class="header-row-sorting__copies">
+                            <input type="number" id="copiesFilter" placeholder="Sort by Number of copies">
+                            <button id="removeCopiesFilter">Remove sorting by Copies</button></th>
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="table-container__body"></tbody>

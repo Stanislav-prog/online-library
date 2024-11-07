@@ -31,7 +31,7 @@ function addBook(){
     }
 
     const messageElement = document.querySelector('.message');
-
+    // FIX REQUIRED
     if (books.some(book => book.id_number === newBook.id_number)) {
         messageElement.textContent = 'The book has already existed.';
         messageElement.style.color = 'red';
@@ -67,7 +67,6 @@ document.getElementById('idFilter').addEventListener('input', filterTable);
 document.getElementById('titleFilter').addEventListener('input', filterTable);
 document.getElementById('editionYearFilter').addEventListener('input', filterTable);
 document.getElementById('authorFilter').addEventListener('input', filterTable);
-document.getElementById('costFilter').addEventListener('input', filterTable);
 document.getElementById('copiesFilter').addEventListener('input', filterTable);
 
 function filterTable(){
@@ -76,7 +75,6 @@ function filterTable(){
     const titleFilterValue = document.getElementById('titleFilter').value.toLowerCase();
     const editionYearFilterValue = document.getElementById('editionYearFilter').value.toLowerCase();
     const authorFilterValue = document.getElementById('authorFilter').value.toLowerCase();
-    const costFilterValue = document.getElementById('costFilter').value.toLowerCase();
     const copiesFilterValue = document.getElementById('copiesFilter').value.toLowerCase();
 
     const table = document.querySelector('.table-container__table');
@@ -87,20 +85,40 @@ function filterTable(){
         const title = row.cells[1].textContent.toLowerCase();
         const editionYear = row.cells[2].textContent.toLowerCase();
         const author = row.cells[3].textContent.toLowerCase();
-        const cost = row.cells[4].textContent.toLowerCase();
         const copies = row.cells[5].textContent.toLowerCase();
 
         const idMatch = id.includes(idFilterValue);
         const titleMatch = title.includes(titleFilterValue);
         const editionYearMatch = editionYear.includes(editionYearFilterValue);
         const authorMatch = author.includes(authorFilterValue);
-        const costMatch = cost.includes(costFilterValue);
         const copiesMatch = copies.includes(copiesFilterValue);
 
-        if (idMatch && titleMatch && editionYearMatch && authorMatch && costMatch && copiesMatch) {
+        if (idMatch && titleMatch && editionYearMatch && authorMatch && copiesMatch) {
             row.style.display = '';
         } else {
             row.style.display = 'none';
+        }
+    }
+}
+
+document.getElementById('costFilterMin').addEventListener('input', filterByCost);
+document.getElementById('costFilterMax').addEventListener('input', filterByCost);
+
+function filterByCost() {
+    const minCost = parseFloat(document.getElementById('costFilterMin').value) || 1;
+    const maxCost = parseFloat(document.getElementById('costFilterMax').value) || 1000;
+
+    const table = document.querySelector('.table-container__table');
+    const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+    for (const row of rows) {
+        const costCell = row.cells[4];
+        const cost = parseFloat(costCell.textContent);
+
+        if (cost >= minCost && cost <= maxCost) {
+            row.style.display = ''; // Show row
+        } else {
+            row.style.display = 'none'; // Hide row
         }
     }
 }
@@ -110,6 +128,29 @@ function resetSorting(){
     document.getElementById('titleFilter').value = '';
     document.getElementById('editionYearFilter').value = '';
     document.getElementById('authorFilter').value = '';
-    document.getElementById('costFilter').value = '';
+    document.getElementById('costFilterMin').value = '';
+    document.getElementById('costFilterMax').value = '';
     document.getElementById('copiesFilter').value = '';
+    filterTable();
 }
+
+// FIX REQUIRED
+document.getElementById('removeIdFilter').addEventListener('click', function(){
+    document.getElementById('idFilter').value = '';
+});
+document.getElementById('removeTitleFilter').addEventListener('click', function(){
+    document.getElementById('titleFilter').value = '';
+});
+document.getElementById('removeYearFilter').addEventListener('click', function(){
+    document.getElementById('editionYearFilter').value = '';
+});
+document.getElementById('removeAuthorFilter').addEventListener('click', function(){
+    document.getElementById('authorFilter').value = '';
+});
+document.getElementById('removeCostFilter').addEventListener('click', function(){
+    document.getElementById('costFilterMin').value = '';
+    document.getElementById('costFilterMax').value = '';
+});
+document.getElementById('removeCopiesFilter').addEventListener('click', function(){
+    document.getElementById('copiesFilter').value = '';
+});
