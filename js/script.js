@@ -31,36 +31,38 @@ function addBook(){
     }
 
     const messageElement = document.querySelector('.message');
-    // FIX REQUIRED
-    if (books.some(book => book.id_number === newBook.id_number)) {
-        messageElement.textContent = 'The book has already existed.';
-        messageElement.style.color = 'red';
-    } else {
-        books.push(newBook);
-        messageElement.textContent = 'The book is saved.';
-        messageElement.style.color = 'green';
+
+    if (formId.value !== '' && formTitle.value !== '' && formEditionYear.value !== '' && formAuthor.value !== ''
+        && formCost.value !== '' && formNumberOfCopies.value !== '') {
+        if (books.some(book => book.id_number === newBook.id_number)) {
+            messageElement.textContent = 'The book has already existed.';
+            messageElement.style.color = 'red';
+        } else {
+            books.push(newBook);
+            messageElement.textContent = 'The book is saved.';
+            messageElement.style.color = 'green';
+
+            const tableBody = document.querySelector('.table-container__body');
+            const row = document.createElement('tr');
+
+            for (let key in newBook){
+                const td = document.createElement('td');
+
+                if (key === 'cost'){
+                    td.textContent = newBook[key] + '$';
+                    row.appendChild(td);
+                } else {
+                    td.textContent = newBook[key];
+                    row.appendChild(td);
+                }
+            }
+
+            tableBody.appendChild(row);
+        }
     }
     setTimeout(() => {
         messageElement.textContent = '';
     }, 3000)
-
-    const tableBody = document.querySelector('.table-container__body');
-
-    const row = document.createElement('tr');
-
-    for (let key in newBook){
-        const td = document.createElement('td');
-
-        if (key === 'cost'){
-            td.textContent = newBook[key] + '$';
-            row.appendChild(td);
-        } else {
-            td.textContent = newBook[key];
-            row.appendChild(td);
-        }
-    }
-
-    tableBody.appendChild(row);
 }
 
 document.getElementById('idFilter').addEventListener('input', filterTable);
@@ -131,7 +133,6 @@ function resetSorting(){
     document.getElementById('costFilterMin').value = '';
     document.getElementById('costFilterMax').value = '';
     document.getElementById('copiesFilter').value = '';
-    filterTable();
 }
 
 // FIX REQUIRED
