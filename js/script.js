@@ -104,3 +104,12 @@ function filterTable(){
         }
     }
 }
+
+function resetSorting(){
+    document.getElementById('idFilter').value = '';
+    document.getElementById('titleFilter').value = '';
+    document.getElementById('editionYearFilter').value = '';
+    document.getElementById('authorFilter').value = '';
+    document.getElementById('costFilter').value = '';
+    document.getElementById('copiesFilter').value = '';
+}
