@@ -56,8 +56,8 @@ function addBook(){
                     row.appendChild(td);
                 }
             }
-
             tableBody.appendChild(row);
+            filterTable();
         }
     }
     setTimeout(() => {
@@ -118,10 +118,19 @@ function filterByCost() {
         const cost = parseFloat(costCell.textContent);
 
         if (cost >= minCost && cost <= maxCost) {
-            row.style.display = ''; // Show row
+            row.style.display = '';
         } else {
-            row.style.display = 'none'; // Hide row
+            row.style.display = 'none';
         }
+    }
+}
+
+function restoreTable(){
+    const table = document.querySelector('.table-container__table');
+    const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+    for (const row of rows) {
+        row.style.display = '';
     }
 }
 
@@ -133,25 +142,31 @@ function resetSorting(){
     document.getElementById('costFilterMin').value = '';
     document.getElementById('costFilterMax').value = '';
     document.getElementById('copiesFilter').value = '';
+    restoreTable();
 }
 
-// FIX REQUIRED
 document.getElementById('removeIdFilter').addEventListener('click', function(){
     document.getElementById('idFilter').value = '';
+    filterTable()
 });
 document.getElementById('removeTitleFilter').addEventListener('click', function(){
     document.getElementById('titleFilter').value = '';
+    filterTable()
 });
 document.getElementById('removeYearFilter').addEventListener('click', function(){
     document.getElementById('editionYearFilter').value = '';
+    filterTable()
 });
 document.getElementById('removeAuthorFilter').addEventListener('click', function(){
     document.getElementById('authorFilter').value = '';
+    filterTable()
 });
 document.getElementById('removeCostFilter').addEventListener('click', function(){
     document.getElementById('costFilterMin').value = '';
     document.getElementById('costFilterMax').value = '';
+    filterTable()
 });
 document.getElementById('removeCopiesFilter').addEventListener('click', function(){
     document.getElementById('copiesFilter').value = '';
+    filterTable()
 });
