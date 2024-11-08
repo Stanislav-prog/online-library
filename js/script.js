@@ -67,7 +67,6 @@ function addBook(){
 
 document.getElementById('idFilter').addEventListener('input', filterTable);
 document.getElementById('titleFilter').addEventListener('input', filterTable);
-document.getElementById('editionYearFilter').addEventListener('input', filterTable);
 document.getElementById('authorFilter').addEventListener('input', filterTable);
 document.getElementById('copiesFilter').addEventListener('input', filterTable);
 
@@ -75,7 +74,6 @@ function filterTable(){
 
     const idFilterValue = document.getElementById('idFilter').value.toLowerCase();
     const titleFilterValue = document.getElementById('titleFilter').value.toLowerCase();
-    const editionYearFilterValue = document.getElementById('editionYearFilter').value.toLowerCase();
     const authorFilterValue = document.getElementById('authorFilter').value.toLowerCase();
     const copiesFilterValue = document.getElementById('copiesFilter').value.toLowerCase();
 
@@ -85,17 +83,15 @@ function filterTable(){
     for (const row of rows) {
         const id = row.cells[0].textContent.toLowerCase();
         const title = row.cells[1].textContent.toLowerCase();
-        const editionYear = row.cells[2].textContent.toLowerCase();
         const author = row.cells[3].textContent.toLowerCase();
         const copies = row.cells[5].textContent.toLowerCase();
 
         const idMatch = id.includes(idFilterValue);
         const titleMatch = title.includes(titleFilterValue);
-        const editionYearMatch = editionYear.includes(editionYearFilterValue);
         const authorMatch = author.includes(authorFilterValue);
         const copiesMatch = copies.includes(copiesFilterValue);
 
-        if (idMatch && titleMatch && editionYearMatch && authorMatch && copiesMatch) {
+        if (idMatch && titleMatch && authorMatch && copiesMatch) {
             row.style.display = '';
         } else {
             row.style.display = 'none';
@@ -125,6 +121,25 @@ function filterByCost() {
     }
 }
 
+document.getElementById('yearDropdownFilter').addEventListener('change', filterByYear);
+
+function filterByYear() {
+    const selectedYear = document.getElementById('yearDropdownFilter').value;
+    const table = document.querySelector('.table-container__table');
+    const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+    for (const row of rows) {
+        const yearCell = row.cells[2];
+        const year = yearCell.textContent;
+
+        if (selectedYear === '' || year === selectedYear) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    }
+}
+
 function restoreTable(){
     const table = document.querySelector('.table-container__table');
     const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
@@ -137,7 +152,7 @@ function restoreTable(){
 function resetSorting(){
     document.getElementById('idFilter').value = '';
     document.getElementById('titleFilter').value = '';
-    document.getElementById('editionYearFilter').value = '';
+    document.getElementById('yearDropdownFilter').value = '';
     document.getElementById('authorFilter').value = '';
     document.getElementById('costFilterMin').value = '';
     document.getElementById('costFilterMax').value = '';
@@ -147,26 +162,26 @@ function resetSorting(){
 
 document.getElementById('removeIdFilter').addEventListener('click', function(){
     document.getElementById('idFilter').value = '';
-    filterTable()
+    filterTable();
 });
 document.getElementById('removeTitleFilter').addEventListener('click', function(){
     document.getElementById('titleFilter').value = '';
-    filterTable()
+    filterTable();
 });
 document.getElementById('removeYearFilter').addEventListener('click', function(){
-    document.getElementById('editionYearFilter').value = '';
-    filterTable()
-});
+    document.getElementById('yearDropdownFilter').value = '';
+    filterTable();
+})
 document.getElementById('removeAuthorFilter').addEventListener('click', function(){
     document.getElementById('authorFilter').value = '';
-    filterTable()
+    filterTable();
 });
 document.getElementById('removeCostFilter').addEventListener('click', function(){
     document.getElementById('costFilterMin').value = '';
     document.getElementById('costFilterMax').value = '';
-    filterTable()
+    filterTable();
 });
 document.getElementById('removeCopiesFilter').addEventListener('click', function(){
     document.getElementById('copiesFilter').value = '';
-    filterTable()
+    filterTable();
 });

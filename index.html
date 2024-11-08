@@ -43,28 +43,55 @@
                         <th class="header-row-sorting__title">
                             <input type="text" id="titleFilter" placeholder="Sort by Title">
                             <button id="removeTitleFilter">Remove sorting by Title</button></th>
-                        </th>
                         <th class="header-row-sorting__edition-year">
-                            <input type="number" id="editionYearFilter" placeholder="Sort by Edition Year">
+                            <label for="yearDropdownFilter">Select a year:</label>
+                            <select id="yearDropdownFilter">
+                                <option value="">All</option>
+                                <script>
+                                    for (let year = 2010; year <= 2030; year++) {
+                                        document.write(`<option value="${year}">${year}</option>`);
+                                    }
+                                </script>
+                            </select>
                             <button id="removeYearFilter">Remove sorting by Year</button></th>
-                        </th>
                         <th class="header-row-sorting__author">
                             <input type="text" id="authorFilter" placeholder="Sort by Author">
                             <button id="removeAuthorFilter">Remove sorting by Author</button></th>
-                        </th>
                         <th class="header-row-sorting__cost">
                             <label>Min: <input type="number" id="costFilterMin" placeholder="1"></label>
                             <label>Max: <input type="number" id="costFilterMax" placeholder="1000"></label>
                             <button id="removeCostFilter">Remove sorting by Cost</button></th>
-                        </th>
                         <th class="header-row-sorting__copies">
                             <input type="number" id="copiesFilter" placeholder="Sort by Number of copies">
                             <button id="removeCopiesFilter">Remove sorting by Copies</button></th>
-                        </th>
                     </tr>
                 </thead>
-                <!-- Create samples to test each time! -->
-                <tbody class="table-container__body"></tbody>
+                <tbody class="table-container__body">
+                    <tr>
+                        <td>1</td>
+                        <td>Something</td>
+                        <td>2024</td>
+                        <td>Stanislav</td>
+                        <td>5</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Nothing</td>
+                        <td>2010</td>
+                        <td>Ruslan</td>
+                        <td>100</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Anything</td>
+                        <td>2030</td>
+                        <td>Igor</td>
+                        <td>1</td>
+                        <td>1000</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
