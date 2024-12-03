@@ -1,4 +1,29 @@
-const books = [];
+const books = [
+    {
+        id_number: '1',
+        title: 'Something',
+        edition_year: '2024',
+        author: 'Stanislav',
+        cost: '10',
+        numberOfCopies: '5',
+    },
+    {
+        id_number: '2',
+        title: 'Nothing',
+        edition_year: '2010',
+        author: 'Ruslan',
+        cost: '30',
+        numberOfCopies: '100',
+    },
+    {
+        id_number: '3',
+        title: 'Anything',
+        edition_year: '2030',
+        author: 'Igor',
+        cost: '100',
+        numberOfCopies: '3',
+    },
+];
 
 const form = document.getElementById('form');
 const formId = document.getElementById('book-id');
@@ -12,22 +37,39 @@ form.addEventListener('submit', (e) => {
     e.preventDefault();
 })
 
+function refreshTable() {
+    const tableBody = document.querySelector('.table-container__body');
+    tableBody.innerHTML = '';
+
+    books.forEach((book) => {
+        const row = document.createElement('tr');
+
+        for (let key in book) {
+            const td = document.createElement('td');
+
+            if (key === 'cost') {
+                td.textContent = book[key] + '$';
+                row.appendChild(td);
+            } else {
+                td.textContent = book[key];
+                row.appendChild(td);
+            }
+        }
+        tableBody.appendChild(row);
+        filterTable();
+    })
+}
+refreshTable();
+
 function addBook(){
 
-    const idValue = formId.value;
-    const titleValue = formTitle.value;
-    const editionYearValue = formEditionYear.value;
-    const authorValue = formAuthor.value;
-    const costValue = formCost.value;
-    const numberOfCopiesValue = formNumberOfCopies.value;
-
     let newBook = {
-        id_number: idValue,
-        title: titleValue,
-        edition_year: editionYearValue,
-        author: authorValue,
-        cost: costValue,
-        numberOfCopies: numberOfCopiesValue,
+        id_number: formId.value,
+        title: formTitle.value,
+        edition_year: formEditionYear.value,
+        author: formAuthor.value,
+        cost: formCost.value,
+        numberOfCopies: formNumberOfCopies.value,
     }
 
     const messageElement = document.querySelector('.message');
@@ -41,34 +83,15 @@ function addBook(){
             books.push(newBook);
             messageElement.textContent = 'The book is saved.';
             messageElement.style.color = 'green';
-
-            const tableBody = document.querySelector('.table-container__body');
-            const row = document.createElement('tr');
-
-            for (let key in newBook){
-                const td = document.createElement('td');
-
-                if (key === 'cost'){
-                    td.textContent = newBook[key] + '$';
-                    row.appendChild(td);
-                } else {
-                    td.textContent = newBook[key];
-                    row.appendChild(td);
-                }
-            }
-            tableBody.appendChild(row);
-            filterTable();
         }
     }
+
+    refreshTable();
+
     setTimeout(() => {
         messageElement.textContent = '';
     }, 3000)
 }
-
-document.getElementById('idFilter').addEventListener('input', filterTable);
-document.getElementById('titleFilter').addEventListener('input', filterTable);
-document.getElementById('authorFilter').addEventListener('input', filterTable);
-document.getElementById('copiesFilter').addEventListener('input', filterTable);
 
 function filterTable(){
 
@@ -99,8 +122,10 @@ function filterTable(){
     }
 }
 
-document.getElementById('costFilterMin').addEventListener('input', filterByCost);
-document.getElementById('costFilterMax').addEventListener('input', filterByCost);
+document.getElementById('idFilter').addEventListener('input', filterTable);
+document.getElementById('titleFilter').addEventListener('input', filterTable);
+document.getElementById('authorFilter').addEventListener('input', filterTable);
+document.getElementById('copiesFilter').addEventListener('input', filterTable);
 
 function filterByCost() {
     const minCost = parseFloat(document.getElementById('costFilterMin').value) || 1;
@@ -121,7 +146,8 @@ function filterByCost() {
     }
 }
 
-document.getElementById('yearDropdownFilter').addEventListener('change', filterByYear);
+document.getElementById('costFilterMin').addEventListener('input', filterByCost);
+document.getElementById('costFilterMax').addEventListener('input', filterByCost);
 
 function filterByYear() {
     const selectedYear = document.getElementById('yearDropdownFilter').value;
@@ -139,6 +165,8 @@ function filterByYear() {
         }
     }
 }
+
+document.getElementById('yearDropdownFilter').addEventListener('change', filterByYear);
 
 function restoreTable(){
     const table = document.querySelector('.table-container__table');
