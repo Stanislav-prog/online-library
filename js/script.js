@@ -63,7 +63,7 @@ window.addEventListener('load', () => {
     refreshTable();
 })
 
-function addBook(){
+function addBook() {
 
     let newBook = {
         id_number: formId.value,
@@ -76,9 +76,15 @@ function addBook(){
 
     const messageElement = document.querySelector('.message');
 
-    if (formEditionYear.value >= 2010 && formEditionYear.value <= 2030 && formCost.value >= 1 && formCost.value <= 1000) {
-        if (formId.value !== '' && formTitle.value !== '' && formEditionYear.value !== '' && formAuthor.value !== ''
-            && formCost.value !== '' && formNumberOfCopies.value !== '') {
+    if (formId.value !== '' && formTitle.value !== '' && formEditionYear.value !== '' && formAuthor.value !== ''
+        && formCost.value !== '' && formNumberOfCopies.value !== '') {
+        if (formEditionYear.value < 2010 || formEditionYear.value > 2030) {
+            messageElement.textContent = 'Edition year should be in range between 2010 and 2030';
+            messageElement.style.color = 'red';
+        } else if (formCost.value < 1 || formCost.value > 1000) {
+            messageElement.textContent = 'Cost should be in range between 1$ and 1000$';
+            messageElement.style.color = 'red';
+        } else {
             if (books.some(book => book.id_number === newBook.id_number)) {
                 messageElement.textContent = 'The book has already existed.';
                 messageElement.style.color = 'red';
@@ -86,10 +92,10 @@ function addBook(){
                 books.push(newBook);
                 messageElement.textContent = 'The book is saved.';
                 messageElement.style.color = 'green';
+                resetFiltering();
             }
         }
     }
-    refreshTable();
 
     setTimeout(() => {
         messageElement.textContent = '';
